@@ -1,9 +1,7 @@
 package tinhdoan.servlets;
 
 import java.io.IOException;
-import java.io.Writer;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,16 +13,16 @@ import javax.servlet.http.HttpSession;
 import tinhdoan.BO.AnswerHumanBO;
 
 /**
- * Servlet implementation class HelloWorld
+ * Servlet implementation class jsCallLib
  */
-@WebServlet("/hello")
-public class AnswerHuman extends HttpServlet {
+@WebServlet("/jsCallLib")
+public class jsCallLib extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AnswerHuman() {
+    public jsCallLib() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,18 +32,6 @@ public class AnswerHuman extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doSomeThing(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getOutputStream().print("POST METHOD : "+request.getParameter("human"));
-		doSomeThing(request, response);
-	}
-	private void doSomeThing (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext sc = this.getServletContext();
 		response.setContentType("text/html; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -62,24 +48,25 @@ public class AnswerHuman extends HttpServlet {
 			answerHumanBO.start();
 			String answer = answerHumanBO.answerHuman(human);
 			session.setAttribute("answer", answer);
-//			response.getOutputStream().print("Answer : "+answer);
 			request.setAttribute("answer", answer);
-			//RequestDispatcher rd = sc.getRequestDispatcher("/chatWithBot.jsp");
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("chatWithBot.jsp");
 			
 		}else {
 			String human = request.getParameter("human");
 			String answer = answerHumanBO.answerHuman(human);
 			session.setAttribute("answer", answer);
-//			response.getOutputStream().print("Answer : "+answer);
 			request.setAttribute("answer", answer);
-			//RequestDispatcher rd = sc.getRequestDispatcher("/chatWithBot.jsp");
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("chatWithBot.jsp");
 			
 		}
-		
-	
 	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
 }
-
-

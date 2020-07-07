@@ -12,7 +12,7 @@ public class CallTheLib {
 	public static void main(String[] args) {
 		CallTheLib callTheLib = new CallTheLib();
 		callTheLib.begin();
-		callTheLib.answerHuman("phí giữ chỗ là bao nhiêu?");
+		callTheLib.answerHuman("học phí là bao nhiêu");
 	}
 	private static final boolean TRACE_MODE = false;
 	Bot bot; 
